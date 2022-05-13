@@ -20,7 +20,12 @@ public class MergeSort {
 
         sort(data, l, mid);
         sort(data, mid + 1, r);
-        merge(data, l, mid, r);
+
+        // 代码优化
+        if (data[mid].compareTo(data[mid + 1]) > 0) {
+            merge(data, l, mid, r);
+        }
+
     }
 
     /**
