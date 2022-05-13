@@ -13,7 +13,7 @@ public class MergeSort {
 
     private static <E extends Comparable<E>> void sort(E[] data, int l, int r) {
 
-        if (r - l < 20) {
+        if (r - l <= 20) {
             InsertionSort.sort(data, l, r);
             return;
         }
