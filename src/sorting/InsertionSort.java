@@ -8,6 +8,23 @@ public class InsertionSort {
     public InsertionSort() {
     }
 
+    /**
+     * 在给定区间内实现插入排序
+     * @param data
+     * @param l
+     * @param r
+     * @param <E>
+     */
+    public static <E extends Comparable<E>> void sort(E[] data, int l, int r) {
+
+        for (int i = l; i < r; i++) {
+
+            for (int j = l + 1; j - 1 >= 0 && data[j].compareTo(data[j - 1]) < 0; j--) {
+                swap(data, j, j - 1);
+            }
+        }
+    }
+
     public static <E extends Comparable<E>> void sort(E[] arr) {
 
         for (int i = 1; i < arr.length; i++) {
@@ -26,7 +43,7 @@ public class InsertionSort {
         }
     }
 
-    public static <E extends Comparable<E>> void sort3(E[] arr){
+    public static <E extends Comparable<E>> void sort3(E[] arr) {
         // 改变循环不变量实现插入排序
 
         int len = arr.length;
@@ -69,21 +86,5 @@ public class InsertionSort {
         E tmp = arr[i];
         arr[i] = arr[j];
         arr[j] = tmp;
-    }
-
-    public static void main(String[] args) {
-        int n = 10000;
-
-        Integer[] arr = ArrayGenerator.generateRandomArray(n, n);
-
-        SortingHelper.sortTest("InsertionSort", arr);
-
-
-        long startTime = System.nanoTime();
-        InsertionSort.sort2(arr);
-        long endTime = System.nanoTime();
-        double time = (endTime - startTime) / 1000000000.0;
-
-        System.out.println(String.format("%s , n = %d : %f s", "InsertionSort", arr.length, time));
     }
 }
