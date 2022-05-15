@@ -8,10 +8,13 @@ public class MergeSort {
     }
 
     public static <E extends Comparable<E>> void sort(E[] data) {
-        sort(data, 0, data.length - 1);
+
+        E[] temp = Arrays.copyOf(data, data.length);
+
+        sort(data, 0, data.length - 1, temp);
     }
 
-    private static <E extends Comparable<E>> void sort(E[] data, int l, int r) {
+    private static <E extends Comparable<E>> void sort(E[] data, int l, int r, E[] temp) {
 
         if (r - l <= 20) {
             InsertionSort.sort(data, l, r);
@@ -19,12 +22,12 @@ public class MergeSort {
         }
         int mid = l + (r - l) / 2;
 
-        sort(data, l, mid);
-        sort(data, mid + 1, r);
+        sort(data, l, mid, temp);
+        sort(data, mid + 1, r, temp);
 
         // 代码优化
         if (data[mid].compareTo(data[mid + 1]) > 0) {
-            merge(data, l, mid, r);
+            merge(data, l, mid, r, temp);
         }
 
     }
@@ -37,9 +40,10 @@ public class MergeSort {
      * @param r
      * @param <E>
      */
-    private static <E extends Comparable<E>> void merge(E[] data, int l, int mid, int r) {
+    private static <E extends Comparable<E>> void merge(E[] data, int l, int mid, int r, E[] temp) {
 
-        E[] temp = Arrays.copyOfRange(data, l, r + 1);
+        // 将数组中元素拷贝公共数组中
+        System.arraycopy(data, l, temp, l, r - l);
 
         int i = l;
         int j = mid + 1;
@@ -47,16 +51,16 @@ public class MergeSort {
         for (int k = l; k <= r; k++) {
 
             if (i > mid) {
-                data[k] = temp[j - l];
+                data[k] = temp[j];
                 i++;
             } else if (j > r) {
-                data[k] = temp[i - l];
+                data[k] = temp[i];
                 j++;
-            } else if (temp[i - l].compareTo(temp[j - l]) < 0) {
-                data[k] = temp[i - l];
+            } else if (temp[i].compareTo(temp[j]) < 0) {
+                data[k] = temp[i];
                 i++;
             } else {
-                data[k] = temp[j - l];
+                data[k] = temp[j];
                 j++;
             }
         }
