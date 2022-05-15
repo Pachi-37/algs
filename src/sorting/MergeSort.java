@@ -33,6 +33,30 @@ public class MergeSort {
     }
 
     /**
+     * 自底向上实现归并排序
+     *
+     * @param data
+     * @param <E>
+     */
+    public static <E extends Comparable<E>> void sortBU(E[] data) {
+
+        E[] temp = Arrays.copyOf(data, data.length);
+        sortBU(data, 0, data.length, temp);
+    }
+
+    private static <E extends Comparable<E>> void sortBU(E[] data, int l, int r, E[] temp) {
+
+        // 遍历合并区间
+        for (int sz = 1; sz < r; sz += sz) {
+            // 合并 [i, i + sz - 1] 和 [i + sz, Min(i + sz + sz - 1, r)]
+            for (int i = l; i + sz < r; i += sz + sz) {
+
+                merge(data, i, i + sz - 1, Math.min(i + 2 * sz - 1, r - 1), temp);
+            }
+        }
+    }
+
+    /**
      * 合并两个有序的区间
      *
      * @param data
@@ -43,7 +67,7 @@ public class MergeSort {
     private static <E extends Comparable<E>> void merge(E[] data, int l, int mid, int r, E[] temp) {
 
         // 将数组中元素拷贝公共数组中
-        System.arraycopy(data, l, temp, l, r - l);
+        System.arraycopy(data, l, temp, l, r - l + 1);
 
         int i = l;
         int j = mid + 1;
