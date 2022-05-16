@@ -51,7 +51,9 @@ public class MergeSort {
             // 合并 [i, i + sz - 1] 和 [i + sz, Min(i + sz + sz - 1, r)]
             for (int i = l; i + sz < r; i += sz + sz) {
 
-                merge(data, i, i + sz - 1, Math.min(i + 2 * sz - 1, r - 1), temp);
+                if (data[i + sz - 1].compareTo(data[i + sz]) > 0) {
+                    merge(data, i, i + sz - 1, Math.min(i + 2 * sz - 1, r - 1), temp);
+                }
             }
         }
     }
