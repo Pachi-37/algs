@@ -78,10 +78,10 @@ public class MergeSort {
 
             if (i > mid) {
                 data[k] = temp[j];
-                i++;
+                j++;
             } else if (j > r) {
                 data[k] = temp[i];
-                j++;
+                i++;
             } else if (temp[i].compareTo(temp[j]) < 0) {
                 data[k] = temp[i];
                 i++;
