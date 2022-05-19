@@ -8,7 +8,7 @@ import java.util.Scanner;
  */
 public class RandomNumberGenerator {
 
-    private static Random random;
+    private static Random random = new Random();
 
     private RandomNumberGenerator(){
     }
@@ -22,8 +22,6 @@ public class RandomNumberGenerator {
     public static int generate(int l, int r){
 
         int ret = 0;
-        random = new Random();
-
         ret += l + random.nextInt(r - l + 1);
 
         return ret;
