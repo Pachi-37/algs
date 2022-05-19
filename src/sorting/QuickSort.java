@@ -1,5 +1,7 @@
 package sorting;
 
+import utils.RandomNumberGenerator;
+
 public class QuickSort {
 
     private QuickSort() {
@@ -15,6 +17,10 @@ public class QuickSort {
             InsertionSort.sort(data, l, r);
             return;
         }
+
+        // 随机化标定点
+        int p = RandomNumberGenerator.generate(l, r);
+        swap(data, p, l);
 
         int spiltPoint = partition(data, l, r);
         sort(data, l, spiltPoint - 1);
