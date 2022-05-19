@@ -11,7 +11,8 @@ public class QuickSort {
 
     private static <E extends Comparable<E>> void sort(E[] data, int l, int r) {
 
-        if (r <= l) {
+        if (r - l <= 15) {
+            InsertionSort.sort(data, l, r);
             return;
         }
 
