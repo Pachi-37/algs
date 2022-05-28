@@ -60,4 +60,49 @@ public class BST<E extends Comparable<E>> {
 
         return node;
     }
+
+    /**
+     * 使用非递归的方法实现插入元素
+     */
+    public void addNonRecursive(E e) {
+
+        // 对特殊情况进行处理
+        if (root == null) {
+            size++;
+            root = new Node(e);
+            return;
+        }
+
+        // 使用 cur 来跟踪待插入结点父节点
+        Node cur = root;
+        while (cur != null) {
+
+            // 待插入值小于该结点，将其插入左子树
+            if (e.compareTo(cur.e) < 0) {
+
+                if (cur.left == null) {
+                    size++;
+                    cur.left = new Node(e);
+                    return;
+                }
+
+                cur = cur.left;
+            }
+            // 待插入值大于，插入右子树
+            else if (e.compareTo(cur.e) > 0) {
+
+                if (cur.right == null) {
+                    size++;
+                    cur.right = new Node(e);
+                    return;
+                }
+
+                cur = cur.right;
+            }
+            // 相等忽略
+            else {
+                return;
+            }
+        }
+    }
 }
