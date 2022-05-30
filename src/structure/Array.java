@@ -213,8 +213,8 @@ public class Array<E> {
         // 垃圾回收
         data[size] = null;
 
-        if (size < data.length / 4) {
-            resize(size * 2);
+        if (size == data.length / 4 || data.length / 2 != 0) {
+            resize(size / 2);
         }
 
         return ret;

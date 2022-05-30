@@ -1,5 +1,9 @@
 package structure.tree;
 
+import structure.stack.ArrayStack;
+import structure.stack.LinkedListStack;
+import structure.stack.Stack;
+
 public class BST<E extends Comparable<E>> {
 
     private class Node {
@@ -140,6 +144,26 @@ public class BST<E extends Comparable<E>> {
         System.out.println(node.e);
         preOrder(node.left);
         preOrder(node.right);
+    }
+
+    // 非递归实现前序遍历
+    public void preOrderNR() {
+
+        if(root == null)
+            return;
+
+        Stack<Node> stack = new ArrayStack<>();
+        stack.push(root);
+        while(!stack.isEmpty()){
+            Node cur = stack.pop();
+            System.out.println(cur.e);
+
+            if(cur.right != null)
+                stack.push(cur.right);
+            if(cur.left != null)
+                stack.push(cur.left);
+        }
+
     }
 
     public void inOrder() {
