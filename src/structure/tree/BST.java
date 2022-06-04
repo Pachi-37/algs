@@ -302,6 +302,54 @@ public class BST<E extends Comparable<E>> {
         return node;
     }
 
+    // 删除目标结点
+    public void remove(E e) {
+
+        if (!contains(e)) {
+            throw new IllegalArgumentException("BST do not exists " + e);
+        }
+
+        root = remove(root, e);
+    }
+
+    private Node remove(Node node, E e) {
+
+
+        if (node == null) {
+            return null;
+        }
+
+        // 找到待删除的结点
+        if (node.e.compareTo(e) > 0) {
+            node.left = remove(node.left, e);
+            return node;
+        } else if (node.e.compareTo(e) < 0) {
+            node.right = remove(node.right, e);
+            return node;
+        } else {
+            // 删除左右子树有一端为空的情况
+            if (node.right == null) {
+                Node leftNode = node.left;
+                node.left = null;
+                size--;
+                return leftNode;
+            } else if (node.left == null) {
+                Node rightNode = node.right;
+                node.right = null;
+                size--;
+                return rightNode;
+            }
+            // 使用左子树的最大值或者右子树的最小值替换结点
+            else {
+                Node precursor = maximum(node.left);
+                precursor.left = removeMax(precursor.left);
+
+                node.left = node.right = null;
+                return precursor;
+            }
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
