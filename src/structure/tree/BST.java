@@ -1,7 +1,8 @@
 package structure.tree;
 
+import structure.queue.ArrayQueue;
+import structure.queue.Queue;
 import structure.stack.ArrayStack;
-import structure.stack.LinkedListStack;
 import structure.stack.Stack;
 
 public class BST<E extends Comparable<E>> {
@@ -149,18 +150,18 @@ public class BST<E extends Comparable<E>> {
     // 非递归实现前序遍历
     public void preOrderNR() {
 
-        if(root == null)
+        if (root == null)
             return;
 
         Stack<Node> stack = new ArrayStack<>();
         stack.push(root);
-        while(!stack.isEmpty()){
+        while (!stack.isEmpty()) {
             Node cur = stack.pop();
             System.out.println(cur.e);
 
-            if(cur.right != null)
+            if (cur.right != null)
                 stack.push(cur.right);
-            if(cur.left != null)
+            if (cur.left != null)
                 stack.push(cur.left);
         }
 
@@ -194,6 +195,71 @@ public class BST<E extends Comparable<E>> {
         postOrder(node.left);
         postOrder(node.right);
         System.out.println(node.e);
+    }
+
+    // 层序遍历
+    public void levelOrder() {
+
+        if (root == null) {
+            throw new IllegalArgumentException("BST is empty.");
+        }
+
+        Queue<Node> queue = new ArrayQueue<>();
+
+        queue.enqueue(root);
+
+        while (!queue.isEmpty()) {
+
+            Node cur = queue.dequeue();
+
+            System.out.println(cur.e);
+
+            if (cur.left != null) {
+                queue.enqueue(cur.left);
+            }
+
+            if (cur.right != null) {
+                queue.enqueue(cur.right);
+            }
+        }
+    }
+
+    // 寻找二分搜索树最小元素
+    public E minimum() {
+
+        if (size == 0) {
+            throw new IllegalArgumentException("BST is empty.");
+        }
+
+        return minimum(root).e;
+    }
+
+    private Node minimum(Node node) {
+
+        if (node.left == null) {
+            return node;
+        }
+
+        return minimum(node.left);
+    }
+
+    // 寻找二分搜索树中最大元素
+    public E maximum(){
+        return maximum(root).e;
+    }
+
+    private Node maximum(Node node){
+
+        if (node.right == null){
+            return node;
+        }
+
+        return maximum(node.right);
+    }
+
+    // 删除最小结点
+    public void removeMin(Node node) {
+
     }
 
     @Override

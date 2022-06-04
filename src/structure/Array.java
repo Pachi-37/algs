@@ -214,7 +214,7 @@ public class Array<E> {
         data[size] = null;
 
         if (size == data.length / 4 && data.length / 2 != 0) {
-            resize(size / 2);
+            resize(data.length / 2);
         }
 
         return ret;
