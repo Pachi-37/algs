@@ -244,13 +244,13 @@ public class BST<E extends Comparable<E>> {
     }
 
     // 寻找二分搜索树中最大元素
-    public E maximum(){
+    public E maximum() {
         return maximum(root).e;
     }
 
-    private Node maximum(Node node){
+    private Node maximum(Node node) {
 
-        if (node.right == null){
+        if (node.right == null) {
             return node;
         }
 
@@ -258,8 +258,48 @@ public class BST<E extends Comparable<E>> {
     }
 
     // 删除最小结点
-    public void removeMin(Node node) {
+    public E removeMin() {
 
+        E ret = minimum();
+        removeMin(root);
+
+        return ret;
+    }
+
+    private Node removeMin(Node node) {
+
+        if (node.left == null) {
+            Node rightNode = node.right;
+            node.right = null;
+            size--;
+            return rightNode;
+        }
+
+        node.left = removeMin(node.left);
+        return node;
+    }
+
+    // 删除最大结点
+    public E removeMax() {
+
+        E ret = maximum();
+        removeMax(root);
+
+        return ret;
+    }
+
+    private Node removeMax(Node node) {
+
+        if (node.right == null) {
+
+            Node leftNode = node.left;
+            node.left = null;
+            size--;
+            return leftNode;
+        }
+
+        node.right = removeMax(node.right);
+        return node;
     }
 
     @Override
