@@ -343,6 +343,7 @@ public class BST<E extends Comparable<E>> {
             else {
                 Node precursor = maximum(node.left);
                 precursor.left = removeMax(precursor.left);
+                precursor.right = node.right;
 
                 node.left = node.right = null;
                 return precursor;
