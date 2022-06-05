@@ -261,7 +261,7 @@ public class BST<E extends Comparable<E>> {
     public E removeMin() {
 
         E ret = minimum();
-        removeMin(root);
+        root = removeMin(root);
 
         return ret;
     }
@@ -283,7 +283,7 @@ public class BST<E extends Comparable<E>> {
     public E removeMax() {
 
         E ret = maximum();
-        removeMax(root);
+        root = removeMax(root);
 
         return ret;
     }
