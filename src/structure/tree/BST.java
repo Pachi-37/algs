@@ -351,6 +351,69 @@ public class BST<E extends Comparable<E>> {
         }
     }
 
+    // 寻找小于该元素的最大值
+    public E floor(E e) {
+        if(size == 0 || e.compareTo(minimum()) < 0 )
+            return null;
+
+        Node floorNode = floor(root, e);
+        return floorNode.e;
+    }
+
+    private Node floor(Node node, E e) {
+
+        // 值不存在
+        if (node == null) {
+            return null;
+        }
+
+        // 如果相等直接返回右子树的最小值
+        if (e.compareTo(node.e) == 0) {
+            return node;
+        } else if (e.compareTo(node.e) > 0) { // node 可能是 e 的floor结点也可能不是
+
+            Node temp = floor(node.right, e);
+
+            if (temp != null) {
+                return temp;
+            }
+
+            return node;
+        } else {
+            return floor(node.left, e);
+        }
+    }
+
+    public E ceil(E e){
+
+        if(size == 0 || e.compareTo(maximum()) > 0 )
+            return null;
+
+        Node ceilNode = ceil(root, e);
+        return ceilNode.e;
+    }
+
+    Node ceil(Node node, E e){
+
+        if( node == null )
+            return null;
+
+        if( node.e.compareTo(e) == 0 )
+            return node;
+
+        // 则要寻找的 e 的 ceil 节点一定在 node 的右子树中
+        if( node.e.compareTo(e) < 0 )
+            return ceil(node.right, e);
+
+        // 则 node 有可能是 e 的 ceil 节点, 也有可能不是(存在比 node.e 小但是大于 e 的其余节点)
+        Node tempNode = ceil(node.left, e);
+        if(tempNode != null)
+            return tempNode;
+
+        return node;
+    }
+
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
