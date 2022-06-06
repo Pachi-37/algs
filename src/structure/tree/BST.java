@@ -393,7 +393,7 @@ public class BST<E extends Comparable<E>> {
         return ceilNode.e;
     }
 
-    Node ceil(Node node, E e){
+    private Node ceil(Node node, E e){
 
         if( node == null )
             return null;
