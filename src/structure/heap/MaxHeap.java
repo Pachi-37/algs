@@ -30,12 +30,52 @@ public class MaxHeap<E extends Comparable<E>> implements Heap<E> {
         shiftUp(data.getSize() - 1);
     }
 
+    @Override
+    public E extractMax() {
+
+        E ret = findMax();
+
+        data.swap(0, data.getSize() - 1);
+        data.removeLast();
+        shiftDown(0);
+
+        return ret;
+    }
+
+    public E findMax() {
+        if (data.getSize() == 0) {
+            throw new IllegalArgumentException("Can not findMax, the heap is empty");
+        }
+
+        return data.get(0);
+    }
+
     // 元素上浮
     private void shiftUp(int index) {
 
         while (index > 0 && data.get(parent(index)).compareTo(data.get(index)) < 0) {
             data.swap(parent(index), index);
             index = parent(index);
+        }
+    }
+
+    // 元素下沉
+    private void shiftDown(int index) {
+
+        while (leftChild(index) < data.getSize()) {
+
+            int l = leftChild(index);
+
+            if (l + 1 < data.getSize() && data.get(l).compareTo(data.get(l + 1)) < 0) {
+                l = rightChild(index);
+            }
+
+            if (data.get(l).compareTo(data.get(index)) < 0) {
+                break;
+            }
+
+            data.swap(l, index);
+            index = l;
         }
     }
 

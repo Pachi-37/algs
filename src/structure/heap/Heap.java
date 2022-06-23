@@ -7,4 +7,6 @@ public interface Heap<E> {
     boolean isEmpty();
 
     void add(E e);
+
+    E extractMax();
 }
