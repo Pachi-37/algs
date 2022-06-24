@@ -14,6 +14,16 @@ public class MaxHeap<E extends Comparable<E>> implements Heap<E> {
         data = new Array<>();
     }
 
+    // 将数组堆化
+    public MaxHeap(E[] arr) {
+
+        data = new Array<>(arr);
+
+        for (int i = parent(arr.length - 1); i > 0; i--) {
+            shiftDown(i);
+        }
+    }
+
     @Override
     public int size() {
         return data.getSize();
@@ -77,6 +87,16 @@ public class MaxHeap<E extends Comparable<E>> implements Heap<E> {
             data.swap(l, index);
             index = l;
         }
+    }
+
+    // 取出堆中的元素再添加新元素
+    private E replace(E val) {
+
+        E ret = extractMax();
+        data.set(0, val);
+        shiftDown(0);
+
+        return ret;
     }
 
     // 寻找该元素的父亲节点
