@@ -40,7 +40,6 @@ public class MaxHeap<E extends Comparable<E>> implements Heap<E> {
         shiftUp(data.getSize() - 1);
     }
 
-    @Override
     public E extractMax() {
 
         E ret = findMax();
