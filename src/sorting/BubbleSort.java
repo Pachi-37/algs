@@ -7,20 +7,22 @@ public class BubbleSort {
 
     public static <E extends Comparable<E>> void sort(E[] data) {
 
-        for (int i = 0; i < data.length - 1; i++) {
+        for (int i = 0; i < data.length - 1; ) {
 
-            boolean isSwapped = false;
+            int lastSwappedIndex = 0;
             for (int j = 0; j < data.length - 1 - i; j++) {
 
                 if (data[j].compareTo(data[j + 1]) > 0) {
                     swap(data, j, j + 1);
-                    isSwapped = true;
+                    lastSwappedIndex = j + 1;
                 }
             }
 
-            if(!isSwapped) {
+            if (lastSwappedIndex == 0) {
                 break;
             }
+
+            i = data.length - lastSwappedIndex;
         }
     }
 
