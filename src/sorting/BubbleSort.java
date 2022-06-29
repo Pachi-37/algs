@@ -18,9 +18,9 @@ public class BubbleSort {
                 }
             }
 
-            if (lastSwappedIndex == 0) {
-                break;
-            }
+//            if (lastSwappedIndex == 0) {
+//                break;
+//            }
 
             i = data.length - lastSwappedIndex;
         }
