@@ -11,22 +11,18 @@ public class ShellSort {
 
         while (elementSpacing >= 1) {
 
-            for (int start = 0; start < elementSpacing; start++) {
+            for (int i = elementSpacing; i < data.length; i++) {
 
-                // [start + elementSpacing, start + 2elementSpacing, ...]
-                for (int i = start + elementSpacing; i < data.length; i += elementSpacing) {
+                E temp = data[i];
+                int j = 0;
+                for (j = i; j - elementSpacing >= 0 && temp.compareTo(data[j - elementSpacing]) < 0; j -= elementSpacing) {
 
-                    E tempStore = data[i];
-                    int j = 0;
-                    for (j = i; j - elementSpacing >= 0 && data[j - elementSpacing].compareTo(tempStore) > 0; j -= elementSpacing) {
-
-                        data[j] = data[j - elementSpacing];
-                    }
-
-                    data[j] = tempStore;
+                    data[j] = data[j - elementSpacing];
                 }
 
+                data[j] = temp;
             }
+
             elementSpacing /= 2;
         }
     }
